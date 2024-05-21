@@ -19,10 +19,12 @@ jobs:
         run: npm run eslint
       - name: Build
         run: npm run build
-      - name: Test
-        run: npm run test
       - name: Install Playwright browsers
         run: npx playwright install
+      - name: Install Playwright dependencies
+        run: sudo npx playwright install-deps
+      - name: Test
+        run: npm run test
       - name: e2e tests
         uses: cypress-io/github-action@v5
         with:
