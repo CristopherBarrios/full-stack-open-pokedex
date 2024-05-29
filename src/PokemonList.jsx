@@ -13,7 +13,7 @@ const PokemonList = ({ pokemonList }) => {
           </div>
         </Link>
       ))}
-      <p>Esto es solo para probar 11.16 ahora? pues a ver </p>
+      <p>Bueno, ahora escribo esto para 11.17 </p>
     </div>
   )
 }
