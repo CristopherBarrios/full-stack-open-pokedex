@@ -1,0 +1,28 @@
+name: Periodic Health Check
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Ejecutar una vez al día
+
+jobs:
+  health-check:
+    runs-on: ubuntu-20.04
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Perform health check
+      uses: Jtalk/url-health-check-action@v4
+      with:
+        url: 'https://full-stack-open-pokedex-cristopher-ws.onrender.com'  # Cambia esta URL por la URL de tu aplicación desplegada
+        max-attempts: 3
+        retry-delay: 5
+
+    - name: Notify on failure
+      if: failure()
+      uses: rjstone/discord-webhook-notify@v1.0.4
+      with:
+        webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+        severity: error
+        details: '❌ Health check failed for URL: https://tu-url-de-despliegue.com'
