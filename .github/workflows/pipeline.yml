@@ -41,6 +41,7 @@ jobs:
         if: ${{ success() }}
         uses: rjstone/discord-webhook-notify@v1.0.4
         with:
+          severity: info
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
           details: "🎉 Deployment succeeded for commit ${{ github.sha }} on branch ${{ github.ref }}."
 
@@ -63,10 +64,12 @@ jobs:
         uses: rjstone/discord-webhook-notify@v1.0.4
         with:
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          severity: info
           details: "🎉 New version tagged and pushed: ${{ github.ref }}."
       - name: Notify failure
         if: ${{ failure() }}
         uses: rjstone/discord-webhook-notify@v1.0.4
         with:
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          severity: error
           details: "❌ Deployment failed for commit ${{ github.sha }} on branch ${{ github.ref }}. Please check the logs for details."
