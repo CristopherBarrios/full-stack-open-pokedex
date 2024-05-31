@@ -3,6 +3,7 @@ name: Periodic Health Check
 on:
   schedule:
     - cron: '0 0 * * *'  # Ejecutar una vez al día
+  workflow_dispatch:
 
 jobs:
   health-check:
