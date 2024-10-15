@@ -39,11 +39,11 @@ jobs:
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
       - name: Notify success
         if: ${{ success() }}
-        uses: rjstone/discord-webhook-notify@v1.0.4
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: Ilshidur/action-discord@master
         with:
-          severity: info
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-          details: "🎉 Deployment succeeded for commit ${{ github.sha }} on branch ${{ github.ref }}."
+          args: '🎉 Deployment succeeded for commit ${{ github.sha }} on branch ${{ github.ref }}.'
 
   tag_release:
     needs: [simple_deployment_pipeline]
